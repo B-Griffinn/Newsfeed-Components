@@ -85,7 +85,23 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+  },
+  {
+    title: 'Professional Software Development in 2019',
+    date: 'Jan 1st, 2019',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
@@ -102,13 +118,64 @@ const data = [
   Hint: You will need to use createElement more than once here!
 
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each peice of the data object above.
+  //myFunction that creates a component
+  */
+  //myFunction that creates a component
+  function createNewsFeed(title, date, firstParagraph, secondParagraph, thirdParagraph) {
 
-  Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+   // define new elements
+   const newsFeed = document.createElement('div'); // parent/container element 
+   const titleh2 = document.createElement('h2'); // creates our h2 element
+   const datePara = document.createElement('p'); // creates our date element
+   const content1 = document.createElement('p'); // creates our p1 element
+   const content2 = document.createElement('p'); // creates our p2 element
+   const content3 = document.createElement('p'); // creates our p3 element
+   const expandBtn = document.createElement('span'); // creates our span element
 
-  Step 3: return the entire component.
+  // setup structure (append) of elements 
+  newsFeed.appendChild(titleh2);
+  newsFeed.appendChild(datePara);
+  newsFeed.appendChild(content1);
+  newsFeed.appendChild(content2);  
+  newsFeed.appendChild(content3);
+  newsFeed.appendChild(expandBtn);
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  // set class names
+  newsFeed.classList.add('article');
+  datePara.classList.add('date');
+  expandBtn.classList.add('expandButton');
 
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
+  // set text content and imgsrcs if needed
+  titleh2.textContent = title;
+  datePara.textContent = date;
+  content1.textContent = firstParagraph;
+  content2.textContent = secondParagraph;
+  content3.textContent = thirdParagraph;
+  expandBtn.textContent = '\u21E9';
 
-*/
+  // Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+  expandBtn.addEventListener('click', (e) => {
+    newsFeed.classList.toggle('article-open'); // on & off
+   }); // end event listener 
+
+   // Step 3: return the entire component.
+  //return our newsFeed
+  return newsFeed;
+  }; // end of component creator function 
+
+
+  // Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  const articles = document.querySelector('.articles');
+  const newArticles = data.map((articles) => {
+    let ourReturn = createNewsFeed(articles.title, articles.date, articles.firstParagraph, articles.secondParagraph, articles.thirdParagraph);
+    console.log(ourReturn); 
+    return ourReturn;
+  });
+
+  // Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article
+  //hard coded into Array of Objects 
+
+  // Step 5a
+  newArticles.forEach((newArticle) => {
+      articles.appendChild(newArticle);
+  });
