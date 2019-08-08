@@ -36,7 +36,14 @@ function createMenu(arr){
   arr.forEach((element) => {
     let listItem = document.createElement('li');
     listItem.textContent = element;
+    listItem.style.color = 'red';
+    listItem.style.border = '5px Solid lightGrey';
+    listItem.style.boxShadow = '5px 5px lightGrey';
+    listItem.style.backgroundColor = 'skyBlue';
+    listItem.create(".box", {type:"x,y", edgeResistance:0.65, bounds:"#container", throwProps:true});
     unorderedList.appendChild(listItem);
+    
+
   });
 
    // Step 3: Using a DOM selector, select the menu button currently on the DOM.
@@ -47,6 +54,11 @@ function createMenu(arr){
     menu.classList.toggle('menu--open');
   });
 
+  // **Stretch**
+  //Edit Styles
+  unorderedList.style.backgroundColor = 'skyBlue'; //UL in our menu
+
+
  // Step 5: return the menu component.
  return menu;
 } //end create function componenet
@@ -54,11 +66,3 @@ function createMenu(arr){
 const header = document.querySelector('.header');
 // console.log(header)
 header.appendChild(createMenu(menuItems));
-  
-  // Step 4: add a click handler to the menu button, when clicked it should toggle the class 'menu--open' on the menu itself
-
-  // Step 5: return the menu component.
-
-  // Step 6: add the menu component to the DOM.
-  
-
